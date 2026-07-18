@@ -1,14 +1,13 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System.Collections;
+using TMPro;
 
 public abstract class Bullet : MonoBehaviour
 {
 
     protected Vector3 spawnPos;
     protected Vector3 target;
-
-    public ObjectPool bulletPool;
     public static event Action<Bullet> onFireEvent;
     public static event Action<Bullet> onHitEvent;
 
@@ -19,7 +18,7 @@ public abstract class Bullet : MonoBehaviour
     public float currentGravity = 0;
     public Sprite currentSprite;
 
-    protected float lifetimeRemaining = 0;
+    protected bool fired = false;
     
     public void ResetBaseStats(BulletStats stats)
     {
@@ -36,6 +35,7 @@ public abstract class Bullet : MonoBehaviour
     /// </summary>
     public virtual void onFire()
     {
+        ResetBaseStats(baseStats);
         if (onFireEvent != null)
         {
             onFireEvent?.Invoke(this);
@@ -58,25 +58,35 @@ public abstract class Bullet : MonoBehaviour
         {
             onHitEvent?.Invoke(this);
         }
+        StopAllCoroutines();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ResetBaseStats(baseStats);
-        lifetimeRemaining = currentlifetime;
     }
 
-    public void ShootBullet()
+    public virtual void ShootBullet()
     {
         Vector2 aimPosition = target;
         Vector2 direction = (aimPosition - (Vector2)transform.position).normalized;
 
-        GameObject bullet = bulletPool.GetPooledObject();
-        bullet.transform.position = spawnPos;
-        bullet.SetActive(true);
+        this.transform.position = spawnPos;
+        this.transform.gameObject.SetActive(true);
 
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        Rigidbody rb = this.GetComponent<Rigidbody>();
         rb.AddForce(direction * currentSpeed, ForceMode.Impulse);
+        fired = true;
+        onFire();
+        StartCoroutine(EndAfterLifetime(currentlifetime));
     }
+
+    IEnumerator EndAfterLifetime(float lifetime)
+    {
+        yield return new WaitForSeconds(lifetime);
+        this.gameObject.SetActive(false);
+        StopAllCoroutines();
+    }
+
 }

@@ -8,6 +8,12 @@ public class AimingReticle : MonoBehaviour
     [field: SerializeField, Range(1f, 3f)] public float rangeMult { get; protected set; } = 1.5f;
     private Vector2 aimInput;
 
+
+    private void Start()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     public void onAim(InputAction.CallbackContext context)
     {
         if (!locked)

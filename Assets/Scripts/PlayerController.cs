@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
         Vector3 move = new Vector3(moveInput.x, 0, 0);
         controller.Move(move * speed *  Time.deltaTime);
         velocity.y += -gravity * Time.deltaTime;
@@ -36,8 +35,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
         Debug.Log($"Move Input: {moveInput}");
+        moveInput = context.ReadValue<Vector2>();
+        if (controller.isGrounded)
+        {
+            velocity.y = 0;
+        } 
     }
 
     public void OnJump(InputAction.CallbackContext context)

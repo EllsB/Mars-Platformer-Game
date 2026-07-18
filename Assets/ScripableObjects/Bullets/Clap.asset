@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletStats
   <speed>k__BackingField: 0
   <damage>k__BackingField: 10
-  <lifetime>k__BackingField: 1
+  <lifetime>k__BackingField: 0.5
   <gravity>k__BackingField: 0
   <sprite>k__BackingField: {fileID: 21300000, guid: 55bf2dd41dbfc034ca77a6b965d13047,
     type: 3}

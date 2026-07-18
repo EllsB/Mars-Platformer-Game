@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet
 {
-    [field: SerializeField] protected AimingReticle aimingReticle;
+    [field: HideInInspector] public AimingReticle aimingReticle;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -16,12 +16,17 @@ public class PlayerBullet : Bullet
         
     }
 
+    public override void ShootBullet()
+    {
+        spawnPos = aimingReticle.transform.position;
+        target = aimingReticle.transform.position;
+        base.ShootBullet();
+    }
+
     public override void onFire()
     {
         base.onFire();
-        spawnPos = aimingReticle.transform.position;
-        target = aimingReticle.transform.position;
-        ShootBullet();
+
     }
 
 
