@@ -4,6 +4,11 @@ using UnityEngine.InputSystem;
 
 public abstract class Bullet : MonoBehaviour
 {
+
+    protected Vector3 spawnPos;
+    protected Vector3 target;
+
+    public ObjectPool bulletPool;
     public static event Action<Bullet> onFireEvent;
     public static event Action<Bullet> onHitEvent;
 
@@ -62,9 +67,16 @@ public abstract class Bullet : MonoBehaviour
         lifetimeRemaining = currentlifetime;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShootBullet()
     {
-        
+        Vector2 aimPosition = target;
+        Vector2 direction = (aimPosition - (Vector2)transform.position).normalized;
+
+        GameObject bullet = bulletPool.GetPooledObject();
+        bullet.transform.position = spawnPos;
+        bullet.SetActive(true);
+
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.AddForce(direction * currentSpeed, ForceMode.Impulse);
     }
 }
