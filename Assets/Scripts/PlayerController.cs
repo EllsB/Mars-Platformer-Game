@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 /// <summary>
 /// Script for moving the player.
@@ -45,12 +46,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed &&  controller.isGrounded)
+        if(context.started &&  controller.isGrounded)
         {
             Debug.Log("Jump");
             velocity.y = Mathf.Sqrt( jumphight * -2f * -gravity);
         }
-        else if (context.performed && !controller.isGrounded)
+        else if (context.started && !controller.isGrounded)
         {
             Debug.Log("Not Grounded");
         }

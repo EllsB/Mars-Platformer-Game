@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using NUnit.Framework;
 
 public abstract class Bullet : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public abstract class Bullet : MonoBehaviour
     protected Vector3 target;
     public static event Action<Bullet> onFireEvent;
     public static event Action<Bullet> onHitEvent;
+    public static event Action<Bullet> onUpdateEvent;
 
     public BulletStats baseStats;
     public float currentSpeed = 0;
@@ -19,7 +21,7 @@ public abstract class Bullet : MonoBehaviour
     public Sprite currentSprite;
 
     protected bool fired = false;
-    
+
     public void ResetBaseStats(BulletStats stats)
     {
         currentSpeed = stats.speed;
@@ -36,9 +38,21 @@ public abstract class Bullet : MonoBehaviour
     public virtual void onFire()
     {
         ResetBaseStats(baseStats);
+        //Apply the effects that get applied on fire
+
         if (onFireEvent != null)
         {
             onFireEvent?.Invoke(this);
+        }
+    }
+
+    public virtual void onUpdate()
+    {
+        //Apply the effects that get applied on fire
+
+        if (onUpdateEvent != null)
+        {
+            onUpdateEvent?.Invoke(this);
         }
     }
 
@@ -54,6 +68,7 @@ public abstract class Bullet : MonoBehaviour
     /// Object that colloded with bullet
     public virtual void onHit(Collision collision)
     {
+        //Apply all the effects that happen on hit
         if (onHitEvent != null)
         {
             onHitEvent?.Invoke(this);
@@ -61,6 +76,8 @@ public abstract class Bullet : MonoBehaviour
         StopAllCoroutines();
     }
     
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

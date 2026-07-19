@@ -14,7 +14,7 @@ public class AimingReticle : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void onAim(InputAction.CallbackContext context)
+    public void OnAim(InputAction.CallbackContext context)
     {
         if (!locked)
         {
@@ -33,7 +33,7 @@ public class AimingReticle : MonoBehaviour
         }
     }
 
-    public void onLock(InputAction.CallbackContext context)
+    public void OnLock(InputAction.CallbackContext context)
     {
         if (!locked && context.ReadValue<bool>())
         {

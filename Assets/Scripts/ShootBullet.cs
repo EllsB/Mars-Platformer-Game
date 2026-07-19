@@ -1,5 +1,9 @@
+using NUnit.Framework;
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class ShootBullet : MonoBehaviour
 {
@@ -22,7 +26,7 @@ public class ShootBullet : MonoBehaviour
         
     }
 
-    public void onShoot()
+    public void OnShoot(InputAction.CallbackContext context)
     {
         if (canShoot)
         {
@@ -35,6 +39,42 @@ public class ShootBullet : MonoBehaviour
                 StartCoroutine(InputCooldown(shootCooldown));
                 canShoot = false;
             }
+        }
+    }
+
+    public void OnSpell1(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                if (context.interaction is SlowTapInteraction)
+                {
+                    //Hold
+                    Debug.Log("Hold Started");
+                }
+                break;
+            case InputActionPhase.Performed:
+                if (context.interaction is SlowTapInteraction)
+                {
+                    Debug.Log($"context.duration {context.duration}");
+                    Debug.Log("Hold Release");
+                    SpellData newSpell = new SpellData();
+                    newSpell.ID = SpellManager.Instance.equippedSpells[0].ID;
+                    newSpell.mult = SpellManager.Instance.equippedSpells[0].mult + (float)context.duration;
+                    SpellManager.Instance.currentSpellEffects.Add(newSpell);
+                    Debug.Log($"New Spell:\n ID {newSpell.ID} Mult: {newSpell.mult}");
+                    //HoldRelease
+                }
+                else
+                {
+                    Debug.Log("Tap");
+                    //Tap
+                    SpellManager.Instance.currentSpellEffects.Add(SpellManager.Instance.equippedSpells[0]);
+                }
+                break;
+            case InputActionPhase.Canceled:
+                //HoldRelease
+                break;
         }
     }
 

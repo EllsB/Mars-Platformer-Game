@@ -1,0 +1,4 @@
+Bugs:
+
+*When holding the aim to top-left, jump does not work.
+ Only on my extra keyboard (not main keyboard or controller)
