@@ -22,7 +22,7 @@ public abstract class Bullet : MonoBehaviour
 
     protected bool fired = false;
 
-    public void ResetBaseStats(BulletStats stats)
+    public virtual void ResetBaseStats(BulletStats stats)
     {
         currentSpeed = stats.speed;
         currentDamage = stats.damage;
@@ -104,6 +104,7 @@ public abstract class Bullet : MonoBehaviour
         yield return new WaitForSeconds(lifetime);
         this.gameObject.SetActive(false);
         StopAllCoroutines();
+        ResetBaseStats(baseStats);
     }
 
 }

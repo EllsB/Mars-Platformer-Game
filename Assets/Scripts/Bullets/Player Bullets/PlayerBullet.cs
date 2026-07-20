@@ -9,8 +9,19 @@ public class PlayerBullet : Bullet
 
     [field: SerializeField] public ExplosionStats explosionStats { get; protected set; }
 
-    public List<SpellData> spellData;
-    
+    public SpellData[] spellData;
+
+    public override void ResetBaseStats(BulletStats stats)
+    {
+        base.ResetBaseStats(stats);
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        } 
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,9 +61,12 @@ public class PlayerBullet : Bullet
 
     public void ApplyOnFireEffect()
     {
+        Debug.Log($"Looking at Spells");
+        Debug.Log($" Bullet Spell Length :{spellData.Length}");
         foreach (SpellData spell in spellData)
         {
-            ApplyFireEffect(spell.ID, spell.mult);
+            Debug.Log($"Spell: {spell.ID}");
+            ApplyOnFireEffect(spell.ID, spell.mult);
         }
     }
 
@@ -64,10 +78,17 @@ public class PlayerBullet : Bullet
         }
     }
 
-    public void ApplyFireEffect(SpellData.SpellID effectID, float mult)
+    public void ApplyOnFireEffect(SpellData.SpellID effectID, float mult)
     {
         switch (effectID)
         {
+            case SpellData.SpellID.Explosion:
+                Debug.Log("Spell Has Explosion");
+                float explosionMult = mult * explosionStats.explosionForce;
+                float radiusMult = mult * explosionStats.radius;
+                explosionStats.CreateExplosion(this.transform.position, explosionStats.lifetime, explosionMult, radiusMult);
+                //Exploding
+                break;
             default:
                 break;
         }
@@ -98,8 +119,9 @@ public class PlayerBullet : Bullet
 
     public override void onFire()
     {
+        Debug.Log("On Fire");
         base.onFire();
-
+        ApplyOnFireEffect();
     }
 
     public void ExplodingEffect()

@@ -35,6 +35,12 @@ PrefabInstance:
       propertyPath: currentlifetime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3308604685257792147, guid: ee3f56ae72d35b747b3e24ac9d0d24d0,
+        type: 3}
+      propertyPath: <explosionStats>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 663b25009109cab43bde5dc2e9e3d39e,
+        type: 2}
     - target: {fileID: 7507993624149435974, guid: ee3f56ae72d35b747b3e24ac9d0d24d0,
         type: 3}
       propertyPath: m_LocalPosition.x

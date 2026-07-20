@@ -49,7 +49,7 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap,SlowTap",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -241,26 +241,103 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "a76015c5-9c97-49ee-a8fc-3d74f356848d",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
+                    "name": "2D Vector",
+                    "id": "d03f8371-de8e-4e75-af83-b22ba14f02bb",
+                    "path": "2DVector(mode=1)",
+                    "interactions": "Tap,SlowTap",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": "",
                     "action": "Mod1",
-                    "isComposite": false,
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "1615b0b2-1409-4c12-b043-8974cb9910dd",
+                    "name": "up",
+                    "id": "45f6c528-5166-42da-a4aa-bd1fef77b99f",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Mod1",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "up",
+                    "id": "cd6cfb70-2524-4376-8ad9-2bf33b6d855d",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Mod1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "9c909b94-e9a4-4f21-94bb-81de356c36b6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Mod1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "f0b26f4c-2ed2-46d6-a382-f0352f2e6f80",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Mod1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "c6b04d6b-3230-4894-80d7-e9ef7e9efe17",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Mod1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d7523c0b-4188-41e5-83dd-0757a9981c28",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Mod1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "2b259d6c-7e13-4c29-9297-77234abc51ce",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Mod1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "1618e005-7394-49d8-a00d-8325a0a1f111",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Mod1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
