@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -10,6 +11,8 @@ public class ExplosionStats : ScriptableObject
     public float lifetime = 1f;
     public GameObject explosionObj;
 
+    public string[] ignoreTag;
+
 
     public void CreateExplosion(Vector3 spawnPos)
     {
@@ -19,7 +22,8 @@ public class ExplosionStats : ScriptableObject
     public void CreateExplosion(Vector3 spawnPos, float lifetime, float explosionForce, float radius)
     {
         GameObject newExplosion = Instantiate(explosionObj, spawnPos, Quaternion.identity);
-        Destroy(newExplosion, lifetime);
+        //newExplosion.transform.localScale = explosionObj.transform.localScale * radius;
+        //Destroy(newExplosion, lifetime);
         KnockBack(spawnPos, explosionForce, radius);
     }
 
@@ -35,7 +39,7 @@ public class ExplosionStats : ScriptableObject
         foreach (Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (rb != null && !ignoreTag.Contains<string>(hit.gameObject.tag))
             {
                 rb.AddExplosionForce(explosionForce, spawnPos, radius);
             }

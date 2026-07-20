@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff60dab0c75afbe4e8f11d7cb2841fd7, type: 3}
   m_Name: ExplosionStats
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionStats
-  explosionForce: 1000
-  radius: 1000
+  explosionForce: 500
+  radius: 500
   lifetime: 0.25
   explosionObj: {fileID: 7241612490464770927, guid: 726ee70384aba3e4ea3ead73cc32459b,
     type: 3}
+  ignoreTag:
+  - Bullet

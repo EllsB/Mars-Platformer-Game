@@ -96,6 +96,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerClapBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 8862907403207903124, guid: ee3f56ae72d35b747b3e24ac9d0d24d0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bullet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
